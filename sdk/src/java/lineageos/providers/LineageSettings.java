@@ -1746,13 +1746,13 @@ public final class LineageSettings {
 
         /**
          * Whether to show the brightness slider in quick settings panel.
-         * 0 = Never, 1 = top , 2 = bottom, 3 = show when expanded
+         * 0 = Never, 1 = top , 2 = bottom, 3 = always show (top) 4 = always show (bottom)
          */
         public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
 
         /** @hide */
         public static final Validator QS_SHOW_BRIGHTNESS_SLIDER_VALIDATOR =
-                new InclusiveIntegerRangeValidator(0, 3);
+                new InclusiveIntegerRangeValidator(0, 4);
 
         /**
          * Whether to control brightness from status bar
