@@ -26,19 +26,29 @@ public class DeviceKeysConstants {
     // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
     //   sdk/src/java/lineageos/providers/LineageSettings.java
     public enum Action {
-        NOTHING,
-        MENU,
-        APP_SWITCH,
-        SEARCH,
-        VOICE_SEARCH,
-        IN_APP_SEARCH,
-        LAUNCH_CAMERA,
-        SLEEP,
-        LAST_APP,
-        SPLIT_SCREEN,
-        KEY_ACTION_NOTIFICATIONS,
-        SINGLE_HAND_LEFT,
-        SINGLE_HAND_RIGHT;
+        NOTHING, //0
+        MENU, //1
+        APP_SWITCH, // 2
+        SEARCH, // 3
+        VOICE_SEARCH, // 4 
+        IN_APP_SEARCH, // 5
+        LAUNCH_CAMERA, // 6
+        SLEEP, // 7
+        LAST_APP, // 8
+        SPLIT_SCREEN, //9 
+        KEY_ACTION_NOTIFICATIONS, //10
+        KEY_ACTION_VOLUME_PANEL, //11
+        KEY_ACTION_POWER_MENU, //12
+        KEY_ACTION_SCREENSHOT, //13
+        KEY_ACTION_QS_PANEL, //14
+        KEY_ACTION_RINGER_MODES, //15
+        KEY_ACTION_KILL_APP, //16
+        KEY_ACTION_SKIP_TRACK, //17
+        KEY_ACTION_PREVIOUS_TRACK, //18
+        KEY_ACTION_CLEAR_NOTIFICATIONS, //19
+        KEY_ACTION_FLASHLIGHT, //20
+        SINGLE_HAND_LEFT, //21
+        SINGLE_HAND_RIGHT;//22
 
         public static Action fromIntSafe(int id) {
             if (id < NOTHING.ordinal() || id > Action.values().length) {
