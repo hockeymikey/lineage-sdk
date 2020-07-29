@@ -47,6 +47,7 @@ public class DeviceKeysConstants {
         KEY_ACTION_PREVIOUS_TRACK, //18
         KEY_ACTION_CLEAR_NOTIFICATIONS, //19
         KEY_ACTION_FLASHLIGHT, //20
+        SCREENSHOT_PARTIAL,
         SINGLE_HAND_LEFT, //21
         SINGLE_HAND_RIGHT;//22
 
