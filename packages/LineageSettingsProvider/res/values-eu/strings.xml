@@ -15,10 +15,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<<<<<<<< HEAD:packages/LineageSettingsProvider/res/values-fa/strings.xml
-<resources></resources>
-========
 <resources>
     <string name="app_name">Lineage ezarpenen biltegiratzea</string>
 </resources>
->>>>>>>> 6907fc278fbf628f64ad20779212b47c32136d0f:packages/LineageSettingsProvider/res/values-eu/strings.xml

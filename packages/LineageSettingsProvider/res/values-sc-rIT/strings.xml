@@ -15,10 +15,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<<<<<<<< HEAD:packages/LineageSettingsProvider/res/values-sc-rIT/strings.xml
 <resources>
     <string name="app_name">Archìviu de impostatziones de Lineage</string>
 </resources>
-========
-<resources></resources>
->>>>>>>> 6907fc278fbf628f64ad20779212b47c32136d0f:packages/LineageSettingsProvider/res/values-af/strings.xml
