@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015, The CyanogenMod Project
+ * Copyright (C) 2015-2016 The CyanogenMod Project
+ * Copyright (C) 2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +81,7 @@ public final class LineageSettings {
     public static final String ACTION_LIVEDISPLAY_SETTINGS =
             "lineageos.settings.LIVEDISPLAY_SETTINGS";
 
-     /**
+    /**
      * Activity Action: Show Trust interface settings
      * <p>
      * Input: Nothing.
@@ -523,6 +524,18 @@ public final class LineageSettings {
          */
         public static String getString(ContentResolver resolver, String name) {
             return getStringForUser(resolver, name, UserHandle.myUserId());
+        }
+
+        /**
+         * Look up a name in the database.
+         * @param resolver to access the database with
+         * @param name to look up in the table
+         * @param def Value to return if the setting is not defined.
+         * @return the corresponding value, or null if not present
+         */
+        public static String getString(ContentResolver resolver, String name, String def) {
+            String str = getStringForUser(resolver, name, UserHandle.myUserId());
+            return str == null ? def : str;
         }
 
         /** @hide */
@@ -1092,7 +1105,7 @@ public final class LineageSettings {
 
         /** @hide */
         public static final Validator KEY_MENU_ACTION_VALIDATOR =
-                new InclusiveIntegerRangeValidator(0, 9);
+                new InclusiveIntegerRangeValidator(0, 11);
 
         /**
          * Action to perform when the menu key is long-pressed.
@@ -1352,15 +1365,13 @@ public final class LineageSettings {
                 sNonNullStringValidator;
 
         /**
-         * Whether to use black theme instead of dark theme
-         * 0: Disabled
-         * 1: Enabled
+         * Current dark overlay package name
          */
-        public static final String BERRY_FORCE_BLACK = "berry_force_black";
+        public static final String BERRY_DARK_OVERLAY = "berry_dark_overlay";
 
         /** @hide */
-        public static final Validator BERRY_FORCE_BLACK_VALIDATOR =
-                new InclusiveIntegerRangeValidator(0, 1);
+        public static final Validator BERRY_DARK_OVERLAY_VALIDATOR =
+                sNonNullStringValidator;
 
         /**
          * Current application managing the style
@@ -1590,7 +1601,7 @@ public final class LineageSettings {
 
         /**
          * Show search bar in recents
-         * 0 = Off, 1 = on
+         * 0 = 0ff, 1 = on
          */
         public static final String RECENTS_SHOW_SEARCH_BAR = "recents_show_search_bar";
 
@@ -2034,6 +2045,15 @@ public final class LineageSettings {
                 };
 
         /**
+         * List of long-screen apps.
+         */
+        public static final String LONG_SCREEN_APPS = "long_screen_apps";
+
+        /** @hide */
+        public static final Validator LONG_SCREEN_APPS_VALIDATOR =
+                sAlwaysTrueValidator;
+
+        /**
          * Control the type of rotation which can be performed using the accelerometer
          * if ACCELEROMETER_ROTATION is enabled.
          * Value is a bitwise combination of
@@ -2108,7 +2128,6 @@ public final class LineageSettings {
                 LineageSettings.System.DISPLAY_TEMPERATURE_NIGHT,
                 LineageSettings.System.DISPLAY_TEMPERATURE_MODE,
                 LineageSettings.System.DISPLAY_AUTO_OUTDOOR_MODE,
-                LineageSettings.System.DISPLAY_READING_MODE,
                 LineageSettings.System.DISPLAY_CABC,
                 LineageSettings.System.DISPLAY_COLOR_ENHANCE,
                 LineageSettings.System.DISPLAY_COLOR_ADJUSTMENT,
@@ -2253,6 +2272,7 @@ public final class LineageSettings {
             VALIDATORS.put(PROXIMITY_ON_WAKE, PROXIMITY_ON_WAKE_VALIDATOR);
             VALIDATORS.put(BERRY_GLOBAL_STYLE, BERRY_GLOBAL_STYLE_VALIDATOR);
             VALIDATORS.put(BERRY_CURRENT_ACCENT, BERRY_CURRENT_ACCENT_VALIDATOR);
+            VALIDATORS.put(BERRY_DARK_OVERLAY, BERRY_DARK_OVERLAY_VALIDATOR);
             VALIDATORS.put(BERRY_FORCE_BLACK, BERRY_FORCE_BLACK_VALIDATOR);
             VALIDATORS.put(BERRY_MANAGED_BY_APP, BERRY_MANAGED_BY_APP_VALIDATOR);
             VALIDATORS.put(ENABLE_FORWARD_LOOKUP, ENABLE_FORWARD_LOOKUP_VALIDATOR);
@@ -2341,6 +2361,8 @@ public final class LineageSettings {
                     DISPLAY_PICTURE_ADJUSTMENT_VALIDATOR);
             VALIDATORS.put(ACCELEROMETER_ROTATION_ANGLES,
                     ACCELEROMETER_ROTATION_ANGLES_VALIDATOR);
+            VALIDATORS.put(LONG_SCREEN_APPS,
+                    LONG_SCREEN_APPS_VALIDATOR);
             VALIDATORS.put(__MAGICAL_TEST_PASSING_ENABLER,
                     __MAGICAL_TEST_PASSING_ENABLER_VALIDATOR);
         };
@@ -2428,6 +2450,18 @@ public final class LineageSettings {
          */
         public static String getString(ContentResolver resolver, String name) {
             return getStringForUser(resolver, name, UserHandle.myUserId());
+        }
+
+        /**
+         * Look up a name in the database.
+         * @param resolver to access the database with
+         * @param name to look up in the table
+         * @param def Value to return if the setting is not defined.
+         * @return the corresponding value, or null if not present
+         */
+        public static String getString(ContentResolver resolver, String name, String def) {
+            String str = getStringForUser(resolver, name, UserHandle.myUserId());
+            return str == null ? def : str;
         }
 
         /** @hide */
@@ -3021,6 +3055,73 @@ public final class LineageSettings {
         public static final String LOCK_SCREEN_WEATHER_ENABLED = "lock_screen_weather_enabled";
 
         /**
+         * Network traffic indicator mode
+         * 0 = Don't show network traffic indicator
+         * 1 = Display up-stream traffic only
+         * 2 = Display down-stream traffic only
+         * 3 = Display both up- and down-stream traffic
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_MODE = "network_traffic_mode";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_MODE_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 3);
+
+        /**
+         * Whether or not to hide the network traffic indicator when there is no activity
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_AUTOHIDE = "network_traffic_autohide";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_AUTOHIDE_VALIDATOR = sBooleanValidator;
+
+        /**
+         * Measurement unit preference for network traffic
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_UNITS = "network_traffic_units";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_UNITS_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 3);
+
+        /**
+         * Whether or not to show measurement units in the network traffic indiciator
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_SHOW_UNITS = "network_traffic_show_units";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_SHOW_UNITS_VALIDATOR = sBooleanValidator;
+
+        /**
+         * Enable displaying the Trust service's notifications
+         * 0 = 0ff, 1 = on
+         * @deprecated Rely on {@link lineageos.providers.TRUST_WARNINGS} instead
+         */
+         @Deprecated
+        public static final String TRUST_NOTIFICATIONS = "trust_notifications";
+
+        /** @hide */
+        @Deprecated
+        public static final Validator TRUST_NOTIFICATIONS_VALIDATOR =
+                sBooleanValidator;
+
+        /**
+         * Trust warnings status
+         *
+         * Stores flags for each feature
+         *
+         * @see {@link lineageos.trust.TrustInterface.TRUST_WARN_MAX_VALUE}
+         */
+        public static final String TRUST_WARNINGS = "trust_warnings";
+
+        /** @hide */
+        public static final Validator TRUST_WARNINGS_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, TrustInterface.TRUST_WARN_MAX_VALUE);
+        /**
          * Enable displaying the Trust service's notifications
          * 0 = 0ff, 1 = on
          * @deprecated Rely on {@link lineageos.providers.TRUST_WARNINGS} instead
@@ -3151,6 +3252,10 @@ public final class LineageSettings {
         static {
             VALIDATORS.put(PROTECTED_COMPONENTS, PROTECTED_COMPONENTS_VALIDATOR);
             VALIDATORS.put(PROTECTED_COMPONENT_MANAGERS, PROTECTED_COMPONENTS_MANAGER_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_MODE, NETWORK_TRAFFIC_MODE_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_AUTOHIDE, NETWORK_TRAFFIC_AUTOHIDE_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_UNITS, NETWORK_TRAFFIC_UNITS_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_SHOW_UNITS, NETWORK_TRAFFIC_SHOW_UNITS_VALIDATOR);
             VALIDATORS.put(TRUST_NOTIFICATIONS, TRUST_NOTIFICATIONS_VALIDATOR);
             VALIDATORS.put(TRUST_WARNINGS, TRUST_WARNINGS_VALIDATOR);
         }
@@ -3246,6 +3351,18 @@ public final class LineageSettings {
          */
         public static String getString(ContentResolver resolver, String name) {
             return getStringForUser(resolver, name, UserHandle.myUserId());
+        }
+
+        /**
+         * Look up a name in the database.
+         * @param resolver to access the database with
+         * @param name to look up in the table
+         * @param def Value to return if the setting is not defined.
+         * @return the corresponding value, or null if not present
+         */
+        public static String getString(ContentResolver resolver, String name, String def) {
+            String str = getStringForUser(resolver, name, UserHandle.myUserId());
+            return str == null ? def : str;
         }
 
         /** @hide */
@@ -3625,4 +3742,3 @@ public final class LineageSettings {
         }
     }
 }
-

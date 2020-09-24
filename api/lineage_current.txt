@@ -362,16 +362,18 @@ package lineageos.platform {
     ctor public Manifest.permission();
     field public static final java.lang.String ACCESS_WEATHER_MANAGER = "lineageos.permission.ACCESS_WEATHER_MANAGER";
     field public static final java.lang.String BIND_WEATHER_PROVIDER_SERVICE = "lineageos.permission.BIND_WEATHER_PROVIDER_SERVICE";
-    field public static final java.lang.String CHANGE_STYLE = "lineageos.permission.CHANGE_STYLE";
     field public static final java.lang.String HARDWARE_ABSTRACTION_ACCESS = "lineageos.permission.HARDWARE_ABSTRACTION_ACCESS";
     field public static final java.lang.String MANAGE_LIVEDISPLAY = "lineageos.permission.MANAGE_LIVEDISPLAY";
     field public static final java.lang.String MANAGE_REMOTE_PREFERENCES = "lineageos.permission.MANAGE_REMOTE_PREFERENCES";
+    field public static final java.lang.String MODIFY_MSIM_PHONE_STATE = "lineageos.permission.MODIFY_MSIM_PHONE_STATE";
+    field public static final java.lang.String MODIFY_NETWORK_SETTINGS = "lineageos.permission.MODIFY_NETWORK_SETTINGS";
     field public static final java.lang.String MODIFY_PROFILES = "lineageos.permission.MODIFY_PROFILES";
+    field public static final java.lang.String MODIFY_SOUND_SETTINGS = "lineageos.permission.MODIFY_SOUND_SETTINGS";
     field public static final java.lang.String PERFORMANCE_ACCESS = "lineageos.permission.PERFORMANCE_ACCESS";
     field public static final java.lang.String PROTECTED_APP = "lineageos.permission.PROTECTED_APP";
     field public static final java.lang.String READ_DATAUSAGE = "lineageos.permission.READ_DATAUSAGE";
+    field public static final java.lang.String READ_MSIM_PHONE_STATE = "lineageos.permission.READ_MSIM_PHONE_STATE";
     field public static final java.lang.String READ_WEATHER = "lineageos.permission.READ_WEATHER";
-    field public static final java.lang.String TRUST_INTERFACE = "lineageos.permission.TRUST_INTERFACE";
     field public static final java.lang.String WRITE_DATAUSAGE = "lineageos.permission.WRITE_DATAUSAGE";
     field public static final java.lang.String WRITE_SECURE_SETTINGS = "lineageos.permission.WRITE_SECURE_SETTINGS";
     field public static final java.lang.String WRITE_SETTINGS = "lineageos.permission.WRITE_SETTINGS";
@@ -443,6 +445,7 @@ package lineageos.power {
     method public int getPowerProfile();
     method public lineageos.power.PerformanceProfile getPowerProfile(int);
     method public java.util.SortedSet<lineageos.power.PerformanceProfile> getPowerProfiles();
+    method public boolean getProfileHasAppProfiles(int);
     method public boolean setPowerProfile(int);
     method public boolean setPowerProfile(lineageos.power.PerformanceProfile);
     field public static final java.lang.String POWER_PROFILE_CHANGED = "lineageos.power.PROFILE_CHANGED";
@@ -462,6 +465,7 @@ package lineageos.power {
     method public int getId();
     method public java.lang.String getName();
     method public float getWeight();
+    method public boolean isBoostEnabled();
     method public void writeToParcel(android.os.Parcel, int);
     field public static final android.os.Parcelable.Creator<lineageos.power.PerformanceProfile> CREATOR;
   }
@@ -754,6 +758,7 @@ package lineageos.providers {
     method public static long getLong(android.content.ContentResolver, java.lang.String, long);
     method public static long getLong(android.content.ContentResolver, java.lang.String) throws lineageos.providers.LineageSettings.LineageSettingNotFoundException;
     method public static java.lang.String getString(android.content.ContentResolver, java.lang.String);
+    method public static java.lang.String getString(android.content.ContentResolver, java.lang.String, java.lang.String);
     method public static android.net.Uri getUriFor(java.lang.String);
     method public static boolean putFloat(android.content.ContentResolver, java.lang.String, float);
     method public static boolean putInt(android.content.ContentResolver, java.lang.String, int);
@@ -777,6 +782,7 @@ package lineageos.providers {
     method public static long getLong(android.content.ContentResolver, java.lang.String, long);
     method public static long getLong(android.content.ContentResolver, java.lang.String) throws lineageos.providers.LineageSettings.LineageSettingNotFoundException;
     method public static java.lang.String getString(android.content.ContentResolver, java.lang.String);
+    method public static java.lang.String getString(android.content.ContentResolver, java.lang.String, java.lang.String);
     method public static android.net.Uri getUriFor(java.lang.String);
     method public static boolean putFloat(android.content.ContentResolver, java.lang.String, float);
     method public static boolean putInt(android.content.ContentResolver, java.lang.String, int);
@@ -797,6 +803,7 @@ package lineageos.providers {
     method public static long getLong(android.content.ContentResolver, java.lang.String, long);
     method public static long getLong(android.content.ContentResolver, java.lang.String) throws lineageos.providers.LineageSettings.LineageSettingNotFoundException;
     method public static java.lang.String getString(android.content.ContentResolver, java.lang.String);
+    method public static java.lang.String getString(android.content.ContentResolver, java.lang.String, java.lang.String);
     method public static android.net.Uri getUriFor(java.lang.String);
     method public static boolean putFloat(android.content.ContentResolver, java.lang.String, float);
     method public static boolean putInt(android.content.ContentResolver, java.lang.String, int);
@@ -813,6 +820,7 @@ package lineageos.providers {
     field public static final java.lang.String BATTERY_LIGHT_MEDIUM_COLOR = "battery_light_medium_color";
     field public static final java.lang.String BATTERY_LIGHT_PULSE = "battery_light_pulse";
     field public static final java.lang.String BERRY_CURRENT_ACCENT = "berry_current_accent";
+    field public static final java.lang.String BERRY_DARK_OVERLAY = "berry_dark_overlay";
     field public static final java.lang.String BERRY_GLOBAL_STYLE = "berry_global_style";
     field public static final java.lang.String BERRY_MANAGED_BY_APP = "berry_managed_by_app";
     field public static final java.lang.String BLUETOOTH_ACCEPT_ALL_FILES = "bluetooth_accept_all_files";
@@ -1009,6 +1017,7 @@ package lineageos.style {
     method public static lineageos.style.StyleInterface getInstance(android.content.Context);
     method public lineageos.style.Suggestion getSuggestion(android.graphics.Bitmap, int[]);
     method public java.util.List<java.lang.String> getTrustedAccents();
+    method public boolean isDarkNow();
     method public boolean setAccent(java.lang.String);
     method public boolean setGlobalStyle(int, java.lang.String);
     field public static final java.lang.String ACCENT_DEFAULT = "lineageos";

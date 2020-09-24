@@ -31,9 +31,6 @@
     <!-- Default for LineageSettings.Secure.ADVANCED_MODE -->
     <bool name="def_advanced_mode">true</bool>
 
-    <!-- Defaults for LineageSettings.Secure.DEV_FORCE_SHOW_NAVBAR -->
-    <integer name="def_force_show_navbar">0</integer>
-
     <!-- Default for LineageSettings.Secure.STATS_COLLECTION -->
     <bool name="def_stats_collection">false</bool>
 
@@ -64,6 +61,9 @@
     <!-- Default for LineageSettings.Global.DEVICE_NAME
          $1=MODEL -->
     <string name="def_device_name">%1$s</string>
+
+    <!-- Defaults for LineageSettings.Global.DEV_FORCE_SHOW_NAVBAR -->
+    <integer name="def_force_show_navbar">0</integer>
 
     <!-- Default for LineageSettings.Global.HEADS_UP_NOTIFICATIONS_ENABLED
          1==on -->
@@ -112,5 +112,12 @@
          ex. com.example.mylls/com.example.mylls.LiveLockScreen|com.example.anotherLls/com.example.anotherLls.MyLls
     -->
     <string name="def_enabled_event_lls_components"></string>
+
+    <!-- Default clock position
+         * 0: show the clock in the right position (LTR)
+         * 1: show the clock in the center
+         * 2: show the clock in the left position (LTR)
+    -->
+    <integer name="def_clock_position">0</integer>
 
 </resources>

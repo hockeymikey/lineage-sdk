@@ -15,4 +15,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<<<<<<<< HEAD:packages/LineageSettingsProvider/res/values-sv/strings.xml
 <resources></resources>
+========
+<resources>
+    <string name="app_name">Lineage Tənzimləmələr Anbarı</string>
+</resources>
+>>>>>>>> 6907fc278fbf628f64ad20779212b47c32136d0f:packages/LineageSettingsProvider/res/values-az/strings.xml

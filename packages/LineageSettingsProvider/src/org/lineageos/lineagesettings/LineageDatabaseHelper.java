@@ -425,9 +425,6 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
             loadBooleanSetting(stmt, LineageSettings.Secure.ADVANCED_MODE,
                     R.bool.def_advanced_mode);
 
-            loadIntegerSetting(stmt, LineageSettings.Secure.DEV_FORCE_SHOW_NAVBAR,
-                    R.integer.def_force_show_navbar);
-
             loadBooleanSetting(stmt, LineageSettings.Secure.STATS_COLLECTION,
                     R.bool.def_stats_collection);
 
@@ -488,6 +485,9 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
             loadIntegerSetting(stmt, LineageSettings.System.STATUS_BAR_BATTERY_STYLE,
                     R.integer.def_battery_style);
 
+            loadIntegerSetting(stmt, LineageSettings.System.STATUS_BAR_CLOCK,
+                    R.integer.def_clock_position);
+
             if (mContext.getResources().getBoolean(R.bool.def_notification_pulse_custom_enable)) {
                 loadStringSetting(stmt, LineageSettings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_VALUES,
                         R.string.def_notification_pulse_custom_value);
@@ -503,6 +503,10 @@ public class LineageDatabaseHelper extends SQLiteOpenHelper{
             stmt = db.compileStatement("INSERT OR IGNORE INTO global(name,value)"
                     + " VALUES(?,?);");
             // Global
+            loadIntegerSetting(stmt,
+                    LineageSettings.Global.DEV_FORCE_SHOW_NAVBAR,
+                    R.integer.def_force_show_navbar);
+
             loadBooleanSetting(stmt,
                     LineageSettings.Global.POWER_NOTIFICATIONS_ENABLED,
                     R.bool.def_power_notifications_enabled);
