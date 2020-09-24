@@ -1365,6 +1365,17 @@ public final class LineageSettings {
                 sNonNullStringValidator;
 
         /**
+         * Whether to use black theme instead of dark theme
+         * 0: Disabled
+         * 1: Enabled
+         */
+        public static final String BERRY_FORCE_BLACK = "berry_force_black";
+
+        /** @hide */
+        public static final Validator BERRY_FORCE_BLACK_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 1);
+
+        /**
          * Current dark overlay package name
          */
         public static final String BERRY_DARK_OVERLAY = "berry_dark_overlay";
@@ -3096,31 +3107,6 @@ public final class LineageSettings {
         /** @hide */
         public static final Validator NETWORK_TRAFFIC_SHOW_UNITS_VALIDATOR = sBooleanValidator;
 
-        /**
-         * Enable displaying the Trust service's notifications
-         * 0 = 0ff, 1 = on
-         * @deprecated Rely on {@link lineageos.providers.TRUST_WARNINGS} instead
-         */
-         @Deprecated
-        public static final String TRUST_NOTIFICATIONS = "trust_notifications";
-
-        /** @hide */
-        @Deprecated
-        public static final Validator TRUST_NOTIFICATIONS_VALIDATOR =
-                sBooleanValidator;
-
-        /**
-         * Trust warnings status
-         *
-         * Stores flags for each feature
-         *
-         * @see {@link lineageos.trust.TrustInterface.TRUST_WARN_MAX_VALUE}
-         */
-        public static final String TRUST_WARNINGS = "trust_warnings";
-
-        /** @hide */
-        public static final Validator TRUST_WARNINGS_VALIDATOR =
-                new InclusiveIntegerRangeValidator(0, TrustInterface.TRUST_WARN_MAX_VALUE);
         /**
          * Enable displaying the Trust service's notifications
          * 0 = 0ff, 1 = on
